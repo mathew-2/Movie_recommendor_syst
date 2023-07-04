@@ -2,9 +2,21 @@ import pandas as pd
 import streamlit as st
 import pickle
 import requests
+import gdown
+
+url = "https://drive.google.com/file/d/1Y_-xU5ore3bCk-vHbLBmbzJ1fJOvVsza/view?usp=drive_link"
+file_id = url.split("/")[5]
+
+url = f"https://drive.google.com/uc?id={file_id}"
+
+similarity_destination = "similarity.pkl"
+
+gdown.download(url, similarity_destination, quiet=False)
+
+similarity = pickle.load(open(similarity_destination, 'rb'))
 
 movies_dict =pickle.load(open('movie_dict.pkl', 'rb'))
-similarity=pickle.load(open('similarity.pkl', 'rb'))
+# similarity=pickle.load(open('similarity.pkl', 'rb'))
 similarity=pd.DataFrame(similarity)
 movies=pd.DataFrame(movies_dict)
 
